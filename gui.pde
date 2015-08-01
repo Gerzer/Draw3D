@@ -53,8 +53,13 @@ synchronized public void win_draw3(GWinApplet appc, GWinData data) { //_CODE_:wi
 
 public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:232958:
   println("button1 - GButton >> GEvent." + event + " @ " + millis());
-  
+  pg.save("out.png");
+  window4.setVisible(true);
 } //_CODE_:button1:232958:
+
+synchronized public void win_draw4(GWinApplet appc, GWinData data) { //_CODE_:window4:805063:
+  appc.background(230);
+} //_CODE_:window4:805063:
 
 
 
@@ -65,7 +70,7 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setCursor(ARROW);
   if(frame != null)
-    frame.setTitle("Sketch Window");
+    frame.setTitle("Sketch");
   sketchPad1 = new GSketchPad(this, 0, 0, 512, 512);
   window1 = new GWindow(this, "Color", 0, 0, 256, 128, false, JAVA2D);
   window1.addDrawHandler(this, "win_draw1");
@@ -101,6 +106,10 @@ public void createGUI(){
   button1.setText("Convert to pseudo-3D");
   button1.setTextBold();
   button1.addEventHandler(this, "button1_click1");
+  window4 = new GWindow(this, "Output", 0, 0, 512, 512, false, JAVA2D);
+  window4.setActionOnClose(G4P.EXIT_APP);
+  window4.addDrawHandler(this, "win_draw4");
+  sketchPad2 = new GSketchPad(window4.papplet, 0, 0, 512, 512);
 }
 
 // Variable declarations 
@@ -115,7 +124,9 @@ GSketchPad sketchPadG;
 GSketchPad sketchPadB; 
 GSketchPad sketchPadRGB; 
 GWindow window2;
-GSlider2D slider2d1; 
+GSlider2D slider2d1;
 GWindow window3;
 GButton button1; 
+GWindow window4;
+GSketchPad sketchPad2; 
 

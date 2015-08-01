@@ -6,6 +6,7 @@ PGraphics pgR;
 PGraphics pgG;
 PGraphics pgB;
 PGraphics pgRGB;
+PGraphics pgOut;
 int r = 0;
 int g = 0;
 int b = 0;
@@ -26,6 +27,8 @@ public void setup(){
   sketchPadB.setGraphic(pgB);
   pgRGB = createGraphics(64, 128);
   sketchPadRGB.setGraphic(pgRGB);
+  pgOut = createGraphics(512, 512);
+  sketchPad2.setGraphic(pgOut);
   
 }
 
@@ -50,11 +53,17 @@ public void draw(){
   pgRGB.beginDraw();
   pgRGB.background(r, g, b);
   pgRGB.endDraw();
+  pgOut.beginDraw();
+  pgOut.background(255);
+  for (int i = 0; i < 30; i += 8) {
+    pgOut.image(pg.get(), (((mouseX - 256) / 64) * (i / 8)), (((mouseY - 256) / 64) * (i / 8)));
+  }
+  pgOut.endDraw();
   
 }
 
 // Use this method to add additional statements
 // to customise the GUI controls
 public void customGUI(){
-
+  window4.setVisible(false);
 }
