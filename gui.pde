@@ -47,6 +47,15 @@ public void slider2d1_change1(GSlider2D source, GEvent event) { //_CODE_:slider2
   println("slider2d1 - GSlider2D >> GEvent." + event + " @ " + millis());
 } //_CODE_:slider2d1:507126:
 
+synchronized public void win_draw3(GWinApplet appc, GWinData data) { //_CODE_:window3:459838:
+  appc.background(230);
+} //_CODE_:window3:459838:
+
+public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:232958:
+  println("button1 - GButton >> GEvent." + event + " @ " + millis());
+  
+} //_CODE_:button1:232958:
+
 
 
 // Create all the GUI controls. 
@@ -86,6 +95,12 @@ public void createGUI(){
   slider2d1.setNumberFormat(G4P.INTEGER, 0);
   slider2d1.setOpaque(true);
   slider2d1.addEventHandler(this, "slider2d1_change1");
+  window3 = new GWindow(this, "Convert", 0, 0, 128, 32, false, JAVA2D);
+  window3.addDrawHandler(this, "win_draw3");
+  button1 = new GButton(window3.papplet, 0, 0, 128, 32);
+  button1.setText("Convert to pseudo-3D");
+  button1.setTextBold();
+  button1.addEventHandler(this, "button1_click1");
 }
 
 // Variable declarations 
@@ -101,4 +116,6 @@ GSketchPad sketchPadB;
 GSketchPad sketchPadRGB; 
 GWindow window2;
 GSlider2D slider2d1; 
+GWindow window3;
+GButton button1; 
 
