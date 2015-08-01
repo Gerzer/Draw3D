@@ -78,7 +78,7 @@ public void createGUI(){
   sketchPadG = new GSketchPad(window1.papplet, 64, 64, 64, 64);
   sketchPadB = new GSketchPad(window1.papplet, 128, 64, 64, 64);
   sketchPadRGB = new GSketchPad(window1.papplet, 192, 0, 64, 128);
-  window2 = new GWindow(this, "Stroke size", 0, 0, 128, 128, false, JAVA2D);
+  window2 = new GWindow(this, "Size", 0, 0, 128, 128, false, JAVA2D);
   window2.addDrawHandler(this, "win_draw2");
   slider2d1 = new GSlider2D(window2.papplet, 0, 0, 128, 128);
   slider2d1.setLimitsX(16.0, 4.0, 128.0);
