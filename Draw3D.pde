@@ -10,6 +10,10 @@ PGraphics pgOut;
 int r = 0;
 int g = 0;
 int b = 0;
+int mode = 0;
+int dimension;
+PImage pgLt;
+PImage pgRt;
 
 
 public void setup(){
@@ -55,8 +59,32 @@ public void draw(){
   pgRGB.endDraw();
   pgOut.beginDraw();
   pgOut.background(255);
-  for (int i = 0; i < 30; i += 8) {
-    pgOut.image(pg.get(), (((mouseX - 256) / 64) * (i / 8)), (((mouseY - 256) / 64) * (i / 8)));
+  if (mode == 1) {
+    for (int i = 0; i < 16; i += 2) {
+      if (i == 14) {
+        pgOut.tint(200);
+      } else {
+        pgOut.tint(255);
+      }
+      pgOut.image(pg.get(), ((mouseX - (width / 2)) / 64) * i, ((mouseY - (width / 2)) / 64) * i);
+    }
+  } else if (mode == 2) {
+    pgLt = pg.get(24, 0, width - 24, height);
+    pgRt = pg.get(0, 0, width - 24, height);
+    dimension = pgLt.width * pgLt.height;
+    pgLt.loadPixels();
+    for (int i = 0; i < dimension; i++) {
+      pgLt.pixels[i] = color(red(pgLt.pixels[i]), 0, 0);
+    }
+    pgLt.updatePixels();
+    dimension = pgRt.width * pgRt.height;
+    pgRt.loadPixels();
+    for (int i = 0; i < dimension; i++) {
+      pgRt.pixels[i] = color(0, green(pgRt.pixels[i]), blue(pgRt.pixels[i]));
+    }
+    pgRt.updatePixels();
+    pgLt.blend(pgRt, 0, 0, pgRt.width, pgRt.height, 0, 0, pgLt.width, pgLt.height, ADD);
+    pgOut.image(pgLt, 12, 0);
   }
   pgOut.endDraw();
   
