@@ -39,6 +39,11 @@ public void stickB_change1(GStick source, GEvent event) { //_CODE_:stickB:715567
   }
 } //_CODE_:stickB:715567:
 
+public void button4_click1(GButton source, GEvent event) { //_CODE_:button4:339527:
+  println("button4 - GButton >> GEvent." + event + " @ " + millis());
+  pg.clear();
+} //_CODE_:button4:339527:
+
 synchronized public void win_draw2(GWinApplet appc, GWinData data) { //_CODE_:window2:587422:
   appc.background(230);
 } //_CODE_:window2:587422:
@@ -103,7 +108,13 @@ public void createGUI(){
   sketchPadR = new GSketchPad(window1.papplet, 0, 64, 64, 64);
   sketchPadG = new GSketchPad(window1.papplet, 64, 64, 64, 64);
   sketchPadB = new GSketchPad(window1.papplet, 128, 64, 64, 64);
-  sketchPadRGB = new GSketchPad(window1.papplet, 192, 0, 64, 128);
+  sketchPadRGB = new GSketchPad(window1.papplet, 192, 64, 64, 64);
+  button4 = new GButton(window1.papplet, 192, 0, 64, 64);
+  button4.setText("Clear");
+  button4.setTextBold();
+  button4.setTextItalic();
+  button4.setLocalColorScheme(GCScheme.ORANGE_SCHEME);
+  button4.addEventHandler(this, "button4_click1");
   window2 = new GWindow(this, "Size", 256, 0, 128, 128, false, JAVA2D);
   window2.addDrawHandler(this, "win_draw2");
   slider2d1 = new GSlider2D(window2.papplet, 0, 0, 128, 128);
@@ -145,6 +156,7 @@ GSketchPad sketchPadR;
 GSketchPad sketchPadG; 
 GSketchPad sketchPadB; 
 GSketchPad sketchPadRGB; 
+GButton button4; 
 GWindow window2;
 GSlider2D slider2d1; 
 GWindow window3;
