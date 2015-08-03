@@ -53,21 +53,9 @@ synchronized public void win_draw3(GWinApplet appc, GWinData data) { //_CODE_:wi
 
 public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:232958:
   println("button1 - GButton >> GEvent." + event + " @ " + millis());
+  pg.save("out.png");
   window4.setVisible(true);
-  mode = 1;
 } //_CODE_:button1:232958:
-
-public void button2_click1(GButton source, GEvent event) { //_CODE_:button2:927389:
-  println("button2 - GButton >> GEvent." + event + " @ " + millis());
-  window4.setVisible(true);
-  mode = 2;
-} //_CODE_:button2:927389:
-
-public void button3_click1(GButton source, GEvent event) { //_CODE_:button3:286186:
-  println("button3 - GButton >> GEvent." + event + " @ " + millis());
-  window4.setVisible(false);
-  mode = 0;
-} //_CODE_:button3:286186:
 
 synchronized public void win_draw4(GWinApplet appc, GWinData data) { //_CODE_:window4:805063:
   appc.background(230);
@@ -104,7 +92,7 @@ public void createGUI(){
   sketchPadG = new GSketchPad(window1.papplet, 64, 64, 64, 64);
   sketchPadB = new GSketchPad(window1.papplet, 128, 64, 64, 64);
   sketchPadRGB = new GSketchPad(window1.papplet, 192, 0, 64, 128);
-  window2 = new GWindow(this, "Size", 256, 0, 128, 128, false, JAVA2D);
+  window2 = new GWindow(this, "Size", 0, 0, 128, 128, false, JAVA2D);
   window2.addDrawHandler(this, "win_draw2");
   slider2d1 = new GSlider2D(window2.papplet, 0, 0, 128, 128);
   slider2d1.setLimitsX(16.0, 4.0, 128.0);
@@ -112,24 +100,14 @@ public void createGUI(){
   slider2d1.setNumberFormat(G4P.INTEGER, 0);
   slider2d1.setOpaque(true);
   slider2d1.addEventHandler(this, "slider2d1_change1");
-  window3 = new GWindow(this, "Convert", 384, 0, 128, 96, false, JAVA2D);
+  window3 = new GWindow(this, "Convert", 0, 0, 128, 32, false, JAVA2D);
   window3.addDrawHandler(this, "win_draw3");
   button1 = new GButton(window3.papplet, 0, 0, 128, 32);
-  button1.setText("Pseudo-3D on");
+  button1.setText("Convert to pseudo-3D");
   button1.setTextBold();
-  button1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   button1.addEventHandler(this, "button1_click1");
-  button2 = new GButton(window3.papplet, 0, 32, 128, 32);
-  button2.setText("Anaglyph-3D on");
-  button2.setTextBold();
-  button2.setLocalColorScheme(GCScheme.CYAN_SCHEME);
-  button2.addEventHandler(this, "button2_click1");
-  button3 = new GButton(window3.papplet, 0, 64, 128, 32);
-  button3.setText("3D off");
-  button3.setTextBold();
-  button3.setLocalColorScheme(GCScheme.CYAN_SCHEME);
-  button3.addEventHandler(this, "button3_click1");
-  window4 = new GWindow(this, "Output", 0, 256, 512, 512, false, JAVA2D);
+  window4 = new GWindow(this, "Output", 0, 0, 512, 512, false, JAVA2D);
+  window4.setActionOnClose(G4P.EXIT_APP);
   window4.addDrawHandler(this, "win_draw4");
   sketchPad2 = new GSketchPad(window4.papplet, 0, 0, 512, 512);
 }
@@ -146,11 +124,9 @@ GSketchPad sketchPadG;
 GSketchPad sketchPadB; 
 GSketchPad sketchPadRGB; 
 GWindow window2;
-GSlider2D slider2d1; 
+GSlider2D slider2d1;
 GWindow window3;
 GButton button1; 
-GButton button2; 
-GButton button3; 
 GWindow window4;
 GSketchPad sketchPad2; 
 
