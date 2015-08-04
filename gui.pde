@@ -74,6 +74,16 @@ public void button3_click1(GButton source, GEvent event) { //_CODE_:button3:2861
   mode = 0;
 } //_CODE_:button3:286186:
 
+public void button5_click1(GButton source, GEvent event) { //_CODE_:button5:407412:
+  println("button5 - GButton >> GEvent." + event + " @ " + millis());
+  if (recording) {
+    recording = false;
+    println(gifExport.finish());
+  } else if (!recording) {
+    recording = true;
+  }
+} //_CODE_:button5:407412:
+
 synchronized public void win_draw4(GWinApplet appc, GWinData data) { //_CODE_:window4:805063:
   appc.background(230);
 } //_CODE_:window4:805063:
@@ -123,7 +133,7 @@ public void createGUI(){
   slider2d1.setNumberFormat(G4P.INTEGER, 0);
   slider2d1.setOpaque(true);
   slider2d1.addEventHandler(this, "slider2d1_change1");
-  window3 = new GWindow(this, "Convert", 384, 0, 128, 96, false, JAVA2D);
+  window3 = new GWindow(this, "Convert", 384, 0, 256, 64, false, JAVA2D);
   window3.addDrawHandler(this, "win_draw3");
   button1 = new GButton(window3.papplet, 0, 0, 128, 32);
   button1.setText("Pseudo-3D on");
@@ -135,11 +145,16 @@ public void createGUI(){
   button2.setTextBold();
   button2.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   button2.addEventHandler(this, "button2_click1");
-  button3 = new GButton(window3.papplet, 0, 64, 128, 32);
+  button3 = new GButton(window3.papplet, 128, 32, 128, 32);
   button3.setText("3D off");
   button3.setTextBold();
-  button3.setLocalColorScheme(GCScheme.CYAN_SCHEME);
+  button3.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   button3.addEventHandler(this, "button3_click1");
+  button5 = new GButton(window3.papplet, 128, 0, 128, 32);
+  button5.setText("Toggle recording");
+  button5.setTextBold();
+  button5.setLocalColorScheme(GCScheme.GOLD_SCHEME);
+  button5.addEventHandler(this, "button5_click1");
   window4 = new GWindow(this, "Output", 0, 256, 512, 512, false, JAVA2D);
   window4.addDrawHandler(this, "win_draw4");
   sketchPad2 = new GSketchPad(window4.papplet, 0, 0, 512, 512);
@@ -163,6 +178,7 @@ GWindow window3;
 GButton button1; 
 GButton button2; 
 GButton button3; 
+GButton button5; 
 GWindow window4;
 GSketchPad sketchPad2; 
 

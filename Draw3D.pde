@@ -1,6 +1,5 @@
-// Need G4P library
 import g4p_controls.*;
-
+import gifAnimation.*;
 PGraphics pg;
 PGraphics pgR;
 PGraphics pgG;
@@ -14,13 +13,12 @@ int mode = 0;
 int dimension;
 PImage pgLt;
 PImage pgRt;
-
-
-public void setup(){
+GifMaker gifExport;
+boolean recording = false;
+public void setup() {
   size(512, 512, JAVA2D);
   createGUI();
   customGUI();
-  // Place your setup code here
   pg = createGraphics(512, 512);
   sketchPad1.setGraphic(pg);
   pgR = createGraphics(64, 64);
@@ -33,10 +31,12 @@ public void setup(){
   sketchPadRGB.setGraphic(pgRGB);
   pgOut = createGraphics(512, 512);
   sketchPad2.setGraphic(pgOut);
-  
+  gifExport = new GifMaker(this, "Draw3D.gif");
+  gifExport.setSize(512, 512);
+  gifExport.setRepeat(0);
+  gifExport.setTransparent(255, 255, 255); 
 }
-
-public void draw(){
+public void draw() {
   background(255);
   pg.beginDraw();
   pg.noStroke();
@@ -87,11 +87,15 @@ public void draw(){
     pgOut.image(pgLt, 12, 0);
   }
   pgOut.endDraw();
-  
+  if (mode == 1 && recording) {
+    try {
+      gifExport.setDelay(4);
+      gifExport.addFrame(pgOut.get());
+    } catch (NullPointerException e) {
+      recording = false;
+    }
+  }
 }
-
-// Use this method to add additional statements
-// to customise the GUI controls
-public void customGUI(){
+public void customGUI() {
   window4.setVisible(false);
 }
